@@ -1,0 +1,36 @@
+name: Docker compose CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setting env file for postgres
+      run: |
+        touch db.env
+        echo POSTGRES_DB=${{ secrets.POSTGRES_NAME }} >> back.env
+        echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> back.env
+        echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> back.env
+    - name: Setting env file for backend
+      run: |
+        touch back.env
+        echo API_KEY=${{ secrets.API_KEY }} >> back.env
+        echo POSTGRES_DB=${{ secrets.POSTGRES_NAME }} >> back.env
+        echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> back.env
+        echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> back.env
+        echo SECRET_KEY=${{ secrets.POSTGRES_PASSWORD }} >> back.env
+    - name: Build the Docker image
+      run: docker-compose -f docker-compose-ci.yml up -d
+    - name: Test backend
+      run: |
+        docker-compose -f docker-compose-ci.yml run back-app sh -c "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics && flake8 . --count --exit-zero --max-complexity=10 --max-line-length=79 --statistics"
+        docker-compose -f docker-compose-ci.yml run back-app sh -c "coverage run --source='.' manage.py test && coverage report"
