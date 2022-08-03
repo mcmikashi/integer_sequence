@@ -1,0 +1,23 @@
+# pull official base image
+FROM python:3.10-alpine
+
+# set work directory
+WORKDIR /django
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBUG 1
+
+
+# install dependencies
+COPY ./back .
+RUN pip install -r requirements.txt
+
+# create user and make him owner of the WORKDIR directory
+RUN adduser -D userdjango
+RUN chown -R userdjango:userdjango  /django
+USER userdjango
+
+# Run the dev server
+CMD [ "python", "manage.py" ,"runserver", "0.0.0.0:8000"]
