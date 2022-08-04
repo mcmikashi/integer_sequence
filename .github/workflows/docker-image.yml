@@ -27,10 +27,13 @@ jobs:
         echo POSTGRES_DB=${{ secrets.POSTGRES_NAME }} >> back.env
         echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> back.env
         echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> back.env
-        echo SECRET_KEY=${{ secrets.POSTGRES_PASSWORD }} >> back.env
-    - name: Build the Docker image
-      run: docker-compose -f docker-compose-ci.yml up -d
-    - name: Test backend
+        echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> back.env
+    - name: Setup the backend test container
+      run: |
+        docker-compose -f docker-compose-ci.yml up -d
+    - name: Check the pep8 code style of the  backend app
       run: |
         docker-compose -f docker-compose-ci.yml run back-app sh -c "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics && flake8 . --count --exit-zero --max-complexity=10 --max-line-length=79 --statistics"
+    - name: Run test and coverage of the backend app
+      run: |
         docker-compose -f docker-compose-ci.yml run back-app sh -c "coverage run --source='.' manage.py test && coverage report"

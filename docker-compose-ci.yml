@@ -1,10 +1,14 @@
 version: "3.9"
 services:
   db:
+    container_name: db
     image: postgres:alpine
-    user: postgres
-    env_file:
-      - db.env
+    networks:
+      - sequencenetwork
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 15s
@@ -25,5 +29,10 @@ services:
     links:
       - redis-server
       - db:db
+    networks:
+      - sequencenetwork
     env_file:
       - back.env
+networks:
+    sequencenetwork:
+        driver: bridge
