@@ -1,7 +1,11 @@
 
 from django.test import TestCase
-import sys
+from rest_framework.test import APITestCase
 from .utils import Update_Recursion_Limit, fibonacci
+from django.urls import reverse
+from rest_framework import status
+import sys
+
 
 
 class TestRecursionLimit(TestCase):
@@ -44,3 +48,32 @@ class TestFibonacci(TestCase):
             fibonacci(True)
             fibonacci(40000)
 
+class TestTestFibonacciAPi(APITestCase):
+
+    def test_valid_data_0(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:fibonacci",kwargs={'index':0})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':0})
+    
+    def test_valid_data_1(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:fibonacci",kwargs={'index':40})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':102334155})
+    
+    def test_invalid_data_0(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:fibonacci",kwargs={'index':25000})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
+
+    def test_invalid_data_1(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:fibonacci",kwargs={'index':1001})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
