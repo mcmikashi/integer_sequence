@@ -28,3 +28,19 @@ def fibonacci(index: int) -> int:
         if index in [0, 1]:
             return index
         return fibonacci(index-1) + fibonacci(index-2)
+
+@cache
+def lucas(index: int) -> int:
+    """This the rercusive function of the lucas suite
+    Args:
+        index (int): the index of lucas
+    Returns:
+        [int]: the number of lucas at the index
+    """
+    if not isinstance(index,int) or index not in range(1001):
+        raise ValueError
+    if index == 0:
+        return 2
+    if index == 1:
+        return 1
+    return lucas(index-1) + lucas(index-2)
