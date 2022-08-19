@@ -157,3 +157,33 @@ class TestDyingRabbits(TestCase):
                 dying_rabbits(-1)
                 dying_rabbits(1400)
 
+
+class TestDyingRabbitsAPI(APITestCase):
+
+    def test_valid_data_0(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:dying_rabbits",kwargs={'index':0})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':1})
+    
+    def test_valid_data_1(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:dying_rabbits",kwargs={'index':14})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':375})
+    
+    def test_invalid_data_0(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:dying_rabbits",kwargs={'index':8000})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
+
+    def test_invalid_data_1(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:dying_rabbits",kwargs={'index':1001})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
