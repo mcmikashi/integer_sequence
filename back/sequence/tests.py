@@ -48,7 +48,7 @@ class TestFibonacci(TestCase):
             fibonacci(True)
             fibonacci(40000)
 
-class TestTestFibonacciAPi(APITestCase):
+class TestFibonacciAPI(APITestCase):
 
     def test_valid_data_0(self):
         """Make sure that the api return the good value"""
