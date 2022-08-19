@@ -45,3 +45,21 @@ def lucas(index: int) -> int:
         return 1
     return lucas(index-1) + lucas(index-2)
 
+@cache
+def dying_rabbits(index: int) -> int:
+    """This the rercusive function of the dying rabbit sequence
+    Args:
+        index (int): the index of dying rabbit sequence
+    Returns:
+        [int]: the result of dying rabbit  sequence at the index
+    """
+    if not isinstance(index,int) or index not in range(1001):
+        raise ValueError
+    if index in range(13):
+        if index in [0, 1, 2]:
+            return 1
+        else:
+            return dying_rabbits(index-1) + dying_rabbits(index-2)
+    else:
+        return ((dying_rabbits(index-1) + dying_rabbits(index-2)) 
+                - dying_rabbits(index-13))
