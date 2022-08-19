@@ -2,7 +2,7 @@ from operator import index
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from .utils import Update_Recursion_Limit, fibonacci
+from .utils import Update_Recursion_Limit, fibonacci, lucas
 
 class SequenceBaseView(APIView):
     """Base view for sequence API"""
@@ -33,3 +33,9 @@ class FibonacciView(SequenceBaseView):
     View to return the value of the fibbonaci sequence at the index
     """
     sequence_function =  staticmethod(fibonacci)
+
+class LucasView(SequenceBaseView):
+    """
+    View to return the value of the lucas sequence at the index
+    """
+    sequence_function =  staticmethod(lucas)
