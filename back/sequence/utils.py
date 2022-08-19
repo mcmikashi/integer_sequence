@@ -16,11 +16,11 @@ class Update_Recursion_Limit:
 
 @cache
 def fibonacci(index: int) -> int:
-    """This is the rercusive function of the fibonacci suite
+    """This is the rercusive function of the fibonacci sequence
     Args:
-        index (int): the index of fibonacci
+        index (int): the index of fibonacci sequence
     Returns:
-        [int]: the number of fibonacci at the index
+        [int]: the result of fibonacci  sequence at the index
     """
     if not isinstance(index,int) or index not in range(1001):
         raise ValueError
@@ -31,11 +31,11 @@ def fibonacci(index: int) -> int:
 
 @cache
 def lucas(index: int) -> int:
-    """This the rercusive function of the lucas suite
+    """This the rercusive function of the lucas sequence
     Args:
-        index (int): the index of lucas
+        index (int): the index of lucas sequence
     Returns:
-        [int]: the number of lucas at the index
+        [int]: the result of lucas sequence at the index
     """
     if not isinstance(index,int) or index not in range(1001):
         raise ValueError
@@ -44,3 +44,4 @@ def lucas(index: int) -> int:
     if index == 1:
         return 1
     return lucas(index-1) + lucas(index-2)
+
