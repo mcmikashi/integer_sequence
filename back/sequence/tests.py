@@ -1,7 +1,7 @@
 
 from django.test import TestCase
 from rest_framework.test import APITestCase
-from .utils import Update_Recursion_Limit, fibonacci,lucas
+from .utils import Update_Recursion_Limit, fibonacci, lucas, dying_rabbits
 from django.urls import reverse
 from rest_framework import status
 import sys
@@ -131,3 +131,29 @@ class TestLucasAPI(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
         self.assertIn("You send an invalid index.",response.data["detail"])
+
+
+class TestDyingRabbits(TestCase):
+
+    def test_zeros_to_two(self):
+        self.assertEqual(dying_rabbits(0), 1)
+        self.assertEqual(dying_rabbits(1), 1)
+        self.assertEqual(dying_rabbits(2), 1)
+
+    def test_basic(self):
+        self.assertEqual(dying_rabbits(3), 2)
+        self.assertEqual(dying_rabbits(6), 8)
+        self.assertEqual(dying_rabbits(14), 375)
+        self.assertEqual(dying_rabbits(20), 6673)
+        self.assertEqual(dying_rabbits(32), 2112571)
+        self.assertEqual(dying_rabbits(38),  37588502)
+        self.assertEqual(dying_rabbits(44),  668803781)
+        self.assertEqual(dying_rabbits(48),  4558212008)
+
+    def test_error(self):
+            with self.assertRaises(ValueError):
+                dying_rabbits("-1")
+                dying_rabbits("aaaa")
+                dying_rabbits(-1)
+                dying_rabbits(1400)
+
