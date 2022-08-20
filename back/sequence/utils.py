@@ -63,3 +63,19 @@ def dying_rabbits(index: int) -> int:
     else:
         return ((dying_rabbits(index-1) + dying_rabbits(index-2)) 
                 - dying_rabbits(index-13))
+
+@cache
+def tribonacci(index: int) -> int:
+    """ This the rercusive function of the tribonacci sequence
+    Args:
+        index (int): the index of tribonacci sequence
+    Returns:
+        [int]: the number of tribonacci sequence at the index
+    """
+    if not isinstance(index,int) or index not in range(1001):
+        raise ValueError
+    if index in [0, 1]:
+        return 0
+    elif index == 2:
+        return 1
+    return tribonacci(index-1) + tribonacci(index-2) + tribonacci(index-3)
