@@ -41,7 +41,7 @@ def lucas(index: int) -> int:
         raise ValueError
     if index == 0:
         return 2
-    if index == 1:
+    elif index == 1:
         return 1
     return lucas(index-1) + lucas(index-2)
 
