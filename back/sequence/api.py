@@ -2,7 +2,7 @@ from operator import index
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from .utils import Update_Recursion_Limit, fibonacci, lucas, dying_rabbits
+from .utils import Update_Recursion_Limit, fibonacci, lucas, dying_rabbits, tribonacci
 
 class SequenceBaseView(APIView):
     """Base view for sequence API"""
@@ -45,3 +45,9 @@ class DyingRabbitsView(SequenceBaseView):
     View to return the value of the dying rabbits sequence at the index
     """
     sequence_function =  staticmethod(dying_rabbits)
+
+class TribonacciView(SequenceBaseView):
+    """
+    View to return the value of the tribonacci sequence at the index
+    """
+    sequence_function =  staticmethod(tribonacci)
