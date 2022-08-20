@@ -210,3 +210,33 @@ class TestTribonacci(TestCase):
             tribonacci("aaaa")
             tribonacci(-100)
             tribonacci(1040)
+
+class TestTribonacciAPI(APITestCase):
+
+    def test_valid_data_0(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:tribonacci",kwargs={'index':0})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':0})
+    
+    def test_valid_data_1(self):
+        """Make sure that the api return the good value"""
+        url = reverse("sequence:tribonacci",kwargs={'index':16})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.data,{'result':3136})
+    
+    def test_invalid_data_0(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:tribonacci",kwargs={'index':9000})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
+
+    def test_invalid_data_1(self):
+        """Make sure that the api return 404 code status and the good value"""
+        url = reverse("sequence:tribonacci",kwargs={'index':1001})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertIn("You send an invalid index.",response.data["detail"])
