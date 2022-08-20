@@ -1,7 +1,7 @@
 
 from django.test import TestCase
 from rest_framework.test import APITestCase
-from .utils import Update_Recursion_Limit, fibonacci, lucas, dying_rabbits
+from .utils import Update_Recursion_Limit, fibonacci, lucas, dying_rabbits, tribonacci
 from django.urls import reverse
 from rest_framework import status
 import sys
@@ -187,3 +187,26 @@ class TestDyingRabbitsAPI(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
         self.assertIn("You send an invalid index.",response.data["detail"])
+
+class TestTribonacci(TestCase):
+
+    def test_vide_zeros_un_deux(self):
+        self.assertEqual(tribonacci(0), 0)
+        self.assertEqual(tribonacci(1), 0)
+        self.assertEqual(tribonacci(2), 1)
+
+    def test_basic(self):
+        self.assertEqual(tribonacci(3), 1)
+        self.assertEqual(tribonacci(6), 7)
+        self.assertEqual(tribonacci(9), 44)
+        self.assertEqual(tribonacci(11), 149)
+        self.assertEqual(tribonacci(16), 3136)
+        self.assertEqual(tribonacci(28),  4700770)
+        self.assertEqual(tribonacci(37),  1132436852)
+
+    def test_error(self):
+        with self.assertRaises(ValueError):
+            tribonacci("-1")
+            tribonacci("aaaa")
+            tribonacci(-100)
+            tribonacci(1040)
