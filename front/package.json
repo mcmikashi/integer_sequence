@@ -21,6 +21,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/svelte": "^3.2.1",
     "@vitest/coverage-c8": "^0.22.1",
+    "carbon-components-svelte": "^0.70.0",
     "eslint": "^8.22.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
