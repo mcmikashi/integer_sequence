@@ -37,3 +37,9 @@ jobs:
     - name: Run test and coverage of the backend app
       run: |
         docker-compose -f docker-compose-ci.yml run back-app sh -c "coverage run --source='.' manage.py test && coverage report"
+    - name: Lint the frontend app
+      run: |
+        docker-compose -f docker-compose-ci.yml run front-app sh -c "npx eslint ./src"
+    - name: Run test and coverage of the frontend app
+      run: |
+        docker-compose -f docker-compose-ci.yml run front-app sh -c "npm run coverage"
