@@ -29,3 +29,15 @@ services:
       - db:db
     env_file:
       - back.env
+  front:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile.front
+    ports:
+      - "5000:5173"
+    volumes:
+      - ./front:/app
+    depends_on:
+      - redis-server
+    links:
+      - redis-server

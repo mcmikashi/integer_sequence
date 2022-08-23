@@ -33,6 +33,20 @@ services:
       - sequencenetwork
     env_file:
       - back.env
+  front-app:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile.front
+    ports:
+      - "5000:5173"
+    volumes:
+      - ./front:/app
+    depends_on:
+      - redis-server
+    links:
+      - redis-server
+
 networks:
     sequencenetwork:
         driver: bridge
