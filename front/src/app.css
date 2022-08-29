@@ -1,0 +1,22 @@
+.text-center{
+    text-align: center;
+}
+
+.text-upper{
+    text-transform: uppercase;
+}
+
+.mini-hv{
+    min-height: 100vh;
+    border: 1px solid #393939;
+    padding: 2vh;
+}
+footer p {
+    padding: 5px;
+}
+.align-item-center{
+    align-items: center;
+}
+td{
+    border: 1px solid white;
+}
