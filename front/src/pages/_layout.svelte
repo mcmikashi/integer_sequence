@@ -7,7 +7,7 @@
   
 <Header/>
 
-<main>
+<main class="mini-hv">
     <slot />
 </main>
 
