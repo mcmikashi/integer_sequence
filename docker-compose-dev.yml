@@ -11,8 +11,12 @@ services:
       timeout: 15s
       retries: 5
       start_period: 30s
+    networks:
+      - sequencedevnetwork
   redis-server:
     image: redis:alpine
+    networks:
+      - sequencedevnetwork
   back:
     build:
       context: .
@@ -24,11 +28,10 @@ services:
     depends_on:
       - redis-server
       - db
-    links:
-      - redis-server
-      - db:db
     env_file:
       - back.env
+    networks:
+      - sequencedevnetwork
   front:
     build:
       context: .
@@ -38,8 +41,17 @@ services:
     volumes:
       - ./front:/app
       - /app/node_modules
-
+      - /app/coverage
+      - /app/.routify
     depends_on:
       - redis-server
-    links:
-      - redis-server
+      - back
+    env_file:
+      - front.env
+    networks:
+      - sequencedevnetwork
+
+networks:
+  sequencedevnetwork:
+    driver: bridge
+    external: true

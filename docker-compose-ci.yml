@@ -26,9 +26,6 @@ services:
     depends_on:
       - redis-server
       - db
-    links:
-      - redis-server
-      - db:db
     networks:
       - sequencenetwork
     env_file:
@@ -45,8 +42,8 @@ services:
       - /app/node_modules
     depends_on:
       - redis-server
-    links:
-      - redis-server
+    environment:
+      - VITE_REST_API_URL=http://localhost:8000/
 
 networks:
     sequencenetwork:
