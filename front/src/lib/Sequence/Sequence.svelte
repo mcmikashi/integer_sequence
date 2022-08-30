@@ -1,5 +1,4 @@
 <script>
-  import { Content } from "carbon-components-svelte";
   import fetch from "cross-fetch";
   import Form from "./UI/Form.svelte";
   import Current from "./UI/Current.svelte";
@@ -56,18 +55,16 @@
   }
 </script>
 
-<Content>
-  <h1 class="text-upper text-center">{sequence_type} sequence</h1>
-  <section id="alert-section">
-    {#if arrayAlert.length != 0}
-      <Alert {arrayAlert} />
-    {/if}
-  </section>
-  <Form on:index={setCurrentIndex} />
-  {#if currentIndex != null}
-    <Current bind:currentIndex bind:currentResult />
+<h1 class="text-upper text-center">{sequence_type} sequence</h1>
+<section id="alert-section">
+  {#if arrayAlert.length != 0}
+    <Alert {arrayAlert} />
   {/if}
-  {#if historyArray.length != 0}
-    <History bind:historyArray />
-  {/if}
-</Content>
+</section>
+<Form on:index={setCurrentIndex} />
+{#if currentIndex != null}
+  <Current bind:currentIndex bind:currentResult />
+{/if}
+{#if historyArray.length != 0}
+  <History bind:historyArray />
+{/if}

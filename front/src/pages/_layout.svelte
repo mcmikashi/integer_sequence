@@ -3,12 +3,14 @@
     $: document.documentElement.setAttribute("theme", theme);
     import Header from "../lib/UI/Header.svelte";
     import Footer  from "../lib/UI/Footer.svelte";
+    import { Content } from "carbon-components-svelte";
+
 </script>
   
 <Header/>
 
-<main class="mini-hv">
+<Content>
     <slot />
-</main>
+</Content>
 
 <Footer/>

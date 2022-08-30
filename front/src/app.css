@@ -6,11 +6,11 @@
     text-transform: uppercase;
 }
 
-.mini-hv{
+#main-content{
     min-height: 100vh;
     border: 1px solid #393939;
-    padding: 2vh;
 }
+
 footer p {
     padding: 5px;
 }
