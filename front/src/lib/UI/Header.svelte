@@ -24,7 +24,7 @@
       <HeaderNavItem href="/fibonacci" text="Fibonacci" />
       <HeaderNavItem href="/tribonacci" text="Tribonacci" />
       <HeaderNavItem href="/lucas" text="Lucas" />
-      <HeaderNavItem href="/rabbit" text="Rabbits" />
+      <HeaderNavItem href="/rabbits" text="Rabbits" />
     </HeaderNavMenu>
   </HeaderNav>
 </Header>
@@ -35,7 +35,7 @@
       <SideNavMenuItem href="/fibonacci" text="Fibonacci" />
       <SideNavMenuItem href="/tribonacci" text="Tribonacci" />
       <SideNavMenuItem href="/lucas" text="Lucas" />
-      <SideNavMenuItem href="/rabbit" text="Rabbits" />
+      <SideNavMenuItem href="/rabbits" text="Rabbits" />
     </SideNavMenu>
   </SideNavItems>
 </SideNav>
