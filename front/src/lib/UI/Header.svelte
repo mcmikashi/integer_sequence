@@ -15,7 +15,7 @@
     let expandedByDefault = false;
 </script>
   
-<Header company="MA"  platformName="Integer Sequence" bind:isSideNavOpen bind:expandedByDefault>
+<Header company="MA"  platformName="Integer Sequence" bind:isSideNavOpen bind:expandedByDefault href="/index">
   <svelte:fragment slot="skip-to-content">
     <SkipToContent />
   </svelte:fragment>
