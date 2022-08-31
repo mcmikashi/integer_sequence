@@ -20,3 +20,7 @@ footer p {
 td{
     border: 1px solid white;
 }
+
+div.fact-tile{
+    min-height: 6rem;
+}
