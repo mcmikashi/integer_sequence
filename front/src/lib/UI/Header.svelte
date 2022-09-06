@@ -21,10 +21,10 @@
   </svelte:fragment>
   <HeaderNav>
     <HeaderNavMenu text="Sequence">
-      <HeaderNavItem href="/fibonacci" text="Fibonacci" />
-      <HeaderNavItem href="/tribonacci" text="Tribonacci" />
-      <HeaderNavItem href="/lucas" text="Lucas" />
-      <HeaderNavItem href="/rabbits" text="Rabbits" />
+      <HeaderNavItem href="/sequence/fibonacci" text="Fibonacci" />
+      <HeaderNavItem href="/sequence/tribonacci" text="Tribonacci" />
+      <HeaderNavItem href="/sequence/lucas" text="Lucas" />
+      <HeaderNavItem href="/sequence/rabbits" text="Rabbits" />
     </HeaderNavMenu>
   </HeaderNav>
 </Header>
@@ -32,10 +32,10 @@
 <SideNav bind:isOpen={isSideNavOpen}>
   <SideNavItems>
     <SideNavMenu text="Sequence">
-      <SideNavMenuItem href="/fibonacci" text="Fibonacci" />
-      <SideNavMenuItem href="/tribonacci" text="Tribonacci" />
-      <SideNavMenuItem href="/lucas" text="Lucas" />
-      <SideNavMenuItem href="/rabbits" text="Rabbits" />
+      <SideNavMenuItem href="/sequence/fibonacci" text="Fibonacci" />
+      <SideNavMenuItem href="/sequence/tribonacci" text="Tribonacci" />
+      <SideNavMenuItem href="/sequence/lucas" text="Lucas" />
+      <SideNavMenuItem href="/sequence/rabbits" text="Rabbits" />
     </SideNavMenu>
   </SideNavItems>
 </SideNav>
