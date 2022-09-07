@@ -8,7 +8,7 @@ class BaseDataVisulation(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ["date", "share"]
+        ordering = ["-date", "-share"]
 
 
 class ProgrammingLanguages(BaseDataVisulation):
